@@ -28,6 +28,8 @@ def analyze_article(article):
         tags.add('gender')
     if analyze_profession(text):
         tags.add('profession')
+    if analyze_neutral(text):
+        tags.add('neutral')
 
     return sorted(tags)
 
@@ -109,6 +111,16 @@ def analyze_profession(text):
     )
 
 
+def analyze_neutral(text):
+    """남녀갈등, 역차별, 페미니즘 논란 등 기계적 중립 표현 검사"""
+    return (
+        analyze(
+            text,
+            r'남성\s?혐오|(젠더|남녀|성)\s?(갈등|대립|대결)|페미(니즘)\s?논란|역차별'
+        ) and is_gender_related(text)
+    )
+
+
 def analyze_bearing(text):
     """'저출산'이라는 용어를 쓰는지 검사"""
     return analyze(text, r'저출산', r'저출생')
@@ -125,6 +137,8 @@ def analyze(text, p_pos, p_neg=None):
 def is_gender_related(text):
     return analyze(
         text,
-        r'성[매매|범죄|추행|폭력|행위]|임신|' \
-        r'여(성|중생|고생|대생|학생)|(친|의붓)딸|동생|동료|제자|후배'
-    )
+        r'강간|성\s?(매매|범죄|차별|추행|폭력|폭행|행위)|임신|' \
+        r'[여女][자성]?\s?(' + '|'.join(PROFESSIONS + OCCUPATIONS) + ')|' \
+        r'여아|소녀|모녀|부녀|딸|동생|동료|제자|후배|' \
+        r'여성|성별|남.?녀|男.?女|젠더|페미(니즘)'
+        )

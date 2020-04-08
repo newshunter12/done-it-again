@@ -163,3 +163,19 @@ def test_profession():
     ]
     for description, text in negatives:
         assert not analyze.analyze_profession(text), description
+
+
+def test_neutral():
+    positives = [
+        ('남녀갈등', '남녀갈등이 심해지고 있다'),
+        ('역차별', '김뫄뫄씨는 페미니즘이 역차별이라며'),
+    ]
+    for description, text in positives:
+        assert analyze.analyze_neutral(text), description
+
+    negatives = [
+        ('관련 키워드 없음', '무해하고 좋은 제목'),
+        ('젠더 문제와 무관', '정규직에 대한 역차별이라며'),
+    ]
+    for description, text in negatives:
+        assert not analyze.analyze_neutral(text), description

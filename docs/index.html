@@ -204,6 +204,13 @@
       {% endcapture %}
       {% include section.html articles=articles tag="gender" guide=guide %}
 
+      {% capture guide %}
+      <p>
+      ...
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="neutral" guide=guide %}
+
       <section class='haf'>
         <h2>(불)명예의 전당</h2>
 
@@ -299,6 +306,7 @@
           abuse: /(아동|청소년|미성년자)\s?(포르노|음란물?)/i,
           gender: /(([^\s]+\((\d{0,3}.?[여女]성?|[여女]성?.?\d{0,3})\))|[여女][자성]?\s?(중생|고생|대생|학생|종업원|직원))/i,
           profession: /([여女][자성]?\s?(가수|교사|교수|배우|연예인|의사))/i,
+          neutral: /(남성\s?혐오|(젠더|남녀|성)\s?(갈등|대립|대결)|페미(니즘)\s?논란|역차별)/i,
         }
 
         const allPatterns = [];

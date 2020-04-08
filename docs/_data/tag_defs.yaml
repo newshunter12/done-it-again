@@ -14,5 +14,7 @@ bearing:
   name: 저출산
 profession:
   name: 전문직 여성 대상화
+neutral:
+  name: 기계적 중립/젠더 편향
 gender:
   name: 여성 성별만 표시
