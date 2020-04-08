@@ -206,7 +206,13 @@
 
       {% capture guide %}
       <p>
-      ...
+      부당한 차별에 맞서 정당한 권리를 요구하는 행위는
+      <span class="bad">남녀갈등</span>,
+      <span class="bad">페미니즘 논란</span>,
+      <span class="bad">역차별</span>이 아닙니다. 기울어진 운동장에서의 기계적
+      중립은 강자의 편에 서는 것과 같습니다.
+      기계적 중립이 아닌
+      <span class="good">사회적 약자의 관점</span>에서의 기술이 필요합니다.
       </p>
       {% endcapture %}
       {% include section.html articles=articles tag="neutral" guide=guide %}
@@ -297,16 +303,16 @@
       // 부적절한 표현에 강조표시 넣기
       (function() {
         const patterns = {
-          trivialize: /(몹쓸\s?짓|검은\s?손|홧김에)/i,
-          demonize: /(인면수심|악마|괴물|인간의 탈을)/i,
-          molka: /(몰카|몰래\s?카메라)/i,
-          metoo: /(나도\s?당했다|피해.{1,5}고백)/i,
-          bearing: /(저출산)/i,
-          porn: /(리벤지\s?포르노)/i,
-          abuse: /(아동|청소년|미성년자)\s?(포르노|음란물?)/i,
-          gender: /(([^\s]+\((\d{0,3}.?[여女]성?|[여女]성?.?\d{0,3})\))|[여女][자성]?\s?(중생|고생|대생|학생|종업원|직원))/i,
-          profession: /([여女][자성]?\s?(가수|교사|교수|배우|연예인|의사))/i,
-          neutral: /(남성\s?혐오|(젠더|남녀|성)\s?(갈등|대립|대결)|페미(니즘)\s?논란|역차별)/i,
+          trivialize: /(몹쓸\s?짓|검은\s?손|홧김에)/ig,
+          demonize: /(인면수심|악마|괴물|인간의 탈을)/ig,
+          molka: /(몰카|몰래\s?카메라)/ig,
+          metoo: /(나도\s?당했다|피해.{1,5}고백)/ig,
+          bearing: /(저출산)/ig,
+          porn: /(리벤지\s?포르노)/ig,
+          abuse: /(아동|청소년|미성년자)\s?(포르노|음란물?)/ig,
+          gender: /(([^\s]+\((\d{0,3}.?[여女]성?|[여女]성?.?\d{0,3})\))|[여女][자성]?\s?(중생|고생|대생|학생|종업원|직원))/ig,
+          profession: /([여女][자성]?\s?(가수|교사|교수|배우|연예인|의사))/ig,
+          neutral: /남성\s?혐오|(젠더|남녀|성|페미(니즘)?)\s?(갈등|대립|대결|논란|논쟁)|역차별/ig,
         }
 
         const allPatterns = [];

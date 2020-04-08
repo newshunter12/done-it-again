@@ -116,7 +116,7 @@ def analyze_neutral(text):
     return (
         analyze(
             text,
-            r'남성\s?혐오|(젠더|남녀|성)\s?(갈등|대립|대결)|페미(니즘)\s?논란|역차별'
+            r'남성\s?혐오|\b(젠더|남녀|성|페미(니즘)?)\s?(갈등|대립|대결|논란|논쟁)|역차별'
         ) and is_gender_related(text)
     )
 

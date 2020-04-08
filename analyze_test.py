@@ -176,6 +176,7 @@ def test_neutral():
     negatives = [
         ('관련 키워드 없음', '무해하고 좋은 제목'),
         ('젠더 문제와 무관', '정규직에 대한 역차별이라며'),
+        ('유해성 논란', '한 여성이 전자담배의 유해성 논란으로'),
     ]
     for description, text in negatives:
         assert not analyze.analyze_neutral(text), description
