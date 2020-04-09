@@ -302,47 +302,44 @@
     <script>
       // 부적절한 표현에 강조표시 넣기
       (function() {
-        const patterns = {
-          trivialize: /(몹쓸\s?짓|검은\s?손|홧김에)/ig,
-          demonize: /(인면수심|악마|괴물|인간의 탈을)/ig,
-          molka: /(몰카|몰래\s?카메라)/ig,
-          metoo: /(나도\s?당했다|피해.{1,5}고백)/ig,
-          bearing: /(저출산)/ig,
-          porn: /(리벤지\s?포르노)/ig,
-          abuse: /(아동|청소년|미성년자)\s?(포르노|음란물?)/ig,
-          gender: /(([^\s]+\((\d{0,3}.?[여女]성?|[여女]성?.?\d{0,3})\))|[여女][자성]?\s?(중생|고생|대생|학생|종업원|직원))/ig,
-          profession: /([여女][자성]?\s?(가수|교사|교수|배우|연예인|의사))/ig,
-          neutral: /남성\s?혐오|(젠더|남녀|성|페미(니즘)?)\s?(갈등|대립|대결|논란|논쟁)|역차별/ig,
-        }
+        const tags = [
+          'trivialize',
+          'demonize',
+          'molka',
+          'metoo',
+          'bearing',
+          'porn',
+          'abuse',
+          'gender',
+          'profession',
+          'neutral',
+        ]
 
-        const allPatterns = [];
-        for(let tag in patterns) {
-          allPatterns.push(patterns[tag]);
-        }
         const latest = document.querySelectorAll(`#latest .article`);
-        highlightArticles(latest, allPatterns);
+        highlightArticles(latest, tags);
 
-        for(let tag in patterns) {
+        tags.forEach(tag => {
           const articles = document.querySelectorAll(`#${tag} .article`);
-          highlightArticles(articles, [patterns[tag]]);
-        }
+          highlightArticles(articles, [tag]);
+        })
 
-        function highlightArticles(articles, patterns) {
+        function highlightArticles(articles, tags) {
           for(let i = 0; i < articles.length; i++) {
             const article = articles[i];
             const title = article.querySelector('.title a');
             const description = article.querySelector('.description');
 
-            highlight(title, patterns);
-            highlight(description, patterns);
+            highlight(title, tags);
+            highlight(description, tags);
           }
         }
 
-        function highlight(el, patterns) {
-          patterns.forEach(pattern => {
-            el.innerHTML = el.innerHTML.replace(pattern, (m, p0) => {
-              return `<span class="bad">${m}</span>`
-            });
+        function highlight(el, tags) {
+          const p = /\{(.+?)\}(.+?)\{\/.+?\}/g
+          el.innerHTML = el.innerHTML.replace(p, (m, tag, text) => {
+            return tags.includes(tag)
+              ? `<span class="bad ${tag}">${text}</span>`
+              : text;
           });
         }
       })();

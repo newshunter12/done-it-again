@@ -114,9 +114,7 @@ class CLI:
     def _analyze_articles(self, articles):
         """Analyze articles"""
         for article in articles:
-            tags = analyze.analyze_article(article)
-            article['tags'] = tags
-            yield article
+            yield analyze.analyze_article(article)
 
 
 if __name__ == '__main__':
