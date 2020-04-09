@@ -51,7 +51,12 @@ def analyze_trivialize(text):
     """'몹쓸 짓' 등 성범죄를 미화하거나 축소하는 표현이 나오는지 검사"""
     if not is_gender_related(text):
         return False, text
-    return analyze('trivialize', text, r'(몹쓸\s?짓|검은\s?손|홧김에)')
+    return analyze(
+        'trivialize',
+        text,
+        r'(몹쓸\s?짓|검은\s?손|홧김에)',
+        r'(방화|주식)',
+    )
 
 
 def analyze_demonize(text):
@@ -62,7 +67,7 @@ def analyze_demonize(text):
         'demonize',
         text,
         r'(인면수심|악마|괴물)',
-        r'최(영미)?\s시인|봉준호'
+        r'최(영미)?\s시인|봉준호|액체\s?괴물|괴물\s?가면'
     )
 
 
@@ -117,7 +122,7 @@ def analyze_gender(text):
         'gender',
         text,
         r'(\w+\((\d{0,3}.?[여|女]성?|[여|女]성?.?\d{0,3})\)|' \
-        r'\b[여女][자성]?\s?(' + '|'.join(OCCUPATIONS) +  '))',
+        r'\b[여女]\s?(' + '|'.join(OCCUPATIONS) +  '))',
         r'(\w+\((\d{0,3}.?[남|男]성?|[남|男]성?.?\d{0,3})\)|' \
         r'\b[남男][자성]?\s?(' + '|'.join(PROFESSIONS + OCCUPATIONS) + '))',
     )

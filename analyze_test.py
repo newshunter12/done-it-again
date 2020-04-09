@@ -38,6 +38,7 @@ def test_trivialize():
         # negatives
         ('관련 키워드 없음', '무해하고 좋은 제목'),
         ('젠더 문제와 무관', '주식 시장 노리는 검은 손'),
+        ('젠더 문제와 무관', '여성이 홧김에 방화'),
     ]
     for description, text in cases:
         _, marked = analyze.analyze_trivialize(strip_markup(text))
@@ -53,6 +54,7 @@ def test_demonize():
         ('관련 키워드 없음', '무해하고 좋은 제목'),
         ('젠더 문제와 무관', '봉준호 감독의 괴물은'),
         ('작품명', '최영미 시인의 작품 "괴물"은 성폭력의'),
+        ('상품명', '여성들 사이에서 액체 괴물 유행'),
     ]
     for description, text in cases:
         _, marked = analyze.analyze_demonize(strip_markup(text))
