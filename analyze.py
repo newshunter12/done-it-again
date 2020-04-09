@@ -1,62 +1,49 @@
 import re
 
 
-def analyze_article(article):
+def analyze_article(article, overrides):
     """제목, 본문, 키워드를 분석해서 분류용 태그들을 추출"""
-    sep = '‖'
+    analyzers = {
+        'trivialize': analyze_trivialize,
+        'demonize': analyze_demonize,
+        'molka': analyze_molka,
+        'porn': analyze_porn,
+        'abuse': analyze_abuse,
+        'metoo': analyze_metoo,
+        'bearing': analyze_bearing,
+        'gender': analyze_gender,
+        'profession': analyze_profession,
+        'neutral': analyze_neutral,
+    }
+
+    sep = '‖'  # 기사 제목이나 본문에 나오지 않을 특수 기호
     text = sep.join([
         article['title'],
         article['description'],
         article['keywords'],
     ])
 
+    if article['article_id'] in overrides:
+        rules = overrides[article['article_id']]
+        tags_to_add = {rule[1:] for rule in rules if rule[0] == '+'}
+        tags_to_del = {rule[1:] for rule in rules if rule[0] == '-'}
+    else:
+        tags_to_add = set()
+        tags_to_del = set()
     tags = set()
-    m, text = analyze_trivialize(text)
-    if m:
-        tags.add('trivialize')
-
-    m, text = analyze_demonize(text)
-    if m:
-        tags.add('demonize')
-
-    m, text = analyze_molka(text)
-    if m:
-        tags.add('molka')
-
-    m, text = analyze_porn(text)
-    if m:
-        tags.add('porn')
-
-    m, text = analyze_abuse(text)
-    if m:
-        tags.add('abuse')
-
-    m, text = analyze_metoo(text)
-    if m:
-        tags.add('metoo')
-
-    m, text = analyze_bearing(text)
-    if m:
-        tags.add('bearing')
-
-    m, text = analyze_profession(text)
-    if m:
-        tags.add('profession')
-
-    m, text = analyze_gender(text)
-    if m:
-        tags.add('gender')
-
-    m, text = analyze_neutral(text)
-    if m:
-        tags.add('neutral')
+    for tag, analyzer in analyzers.items():
+        if tag in tags_to_del:
+            continue
+        m, text = analyzer(text)
+        if m:
+            tags.add(tag)
 
     title, description, _ = text.split(sep)
     return {
         **article,
         'title': title,
         'description': description,
-        'tags': sorted(tags),
+        'tags': sorted(tags | tags_to_add),
     }
 
 

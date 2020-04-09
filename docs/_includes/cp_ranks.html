@@ -1,7 +1,7 @@
 <ol class="chart">
   {% for row in include.rankers %}
   <li>
-    <div class="name">{{ row.cp_name_masked }}</div>
+    <div class="name">{{ row.cp_name }}</div>
     <div class="bar-container">
       {% assign ratio = row.ratio | divided_by: include.ref.ratio %}
       {% assign percent = ratio | times: 100 %}

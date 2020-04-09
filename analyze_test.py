@@ -4,14 +4,30 @@ import analyze
 
 def test_analyze_article():
     article = {
+        'article_id': '1',
         'title': '여성에게 몹쓸 짓을',
         'description': '몰카를 촬영한 혐의로',
         'keywords': '',
     }
-    marked = analyze.analyze_article(article)
+    marked = analyze.analyze_article(article, {})
     assert marked['tags'] == ['molka', 'trivialize']
     assert marked['title'] == '여성에게 {trivialize}몹쓸 짓{/trivialize}을'
     assert marked['description'] == '{molka}몰카{/molka}를 촬영한 혐의로'
+
+
+def test_manual_override():
+    article = {
+        'article_id': '1',
+        'title': '"여성에게 몹쓸 짓"이라는 표현의 문제점',
+        'description': '...',
+        'keywords': '',
+    }
+    overrides = {
+        '1': ['-trivialize', '+molka'],
+    }
+    marked = analyze.analyze_article(article, overrides)
+    assert marked['tags'] == ['molka']
+    assert marked['title'] == article['title']
 
 
 def test_trivialize():

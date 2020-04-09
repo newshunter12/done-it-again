@@ -3,6 +3,16 @@ name: Update data
 on:
   schedule:
   - cron: "30 4,10,16,22 * * *"
+  push:
+    branches:
+    - master
+    paths:
+    - '**.py'
+    - '**.html'
+    - '**.sass'
+    - '**.js'
+    - 'docs/_data/overrides.csv'
+    - 'docs/_data/tag_defs.yaml'
 jobs:
   build:
     runs-on: ubuntu-latest

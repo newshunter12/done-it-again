@@ -24,7 +24,8 @@ class CLI:
     """News analyzer"""
     def tag(self):
         """기사 전체를 분석하여 분류 태그를 추가한 후 별도 파일로 저장"""
-        articles = self._analyze_articles(self._get_articles())
+        overrides = self._load_override_rules()
+        articles = self._analyze_articles(self._get_articles(), overrides)
         os.makedirs(DATA_DIR, exist_ok=True)
         with open(os.path.join(DATA_DIR, 'articles.csv'), 'w') as f:
             csvw = csv.DictWriter(f, FIELDS)
@@ -37,7 +38,8 @@ class CLI:
 
     def stats(self):
         """통계분석"""
-        articles = self._analyze_articles(self._get_articles())
+        overrides = self._load_override_rules()
+        articles = self._analyze_articles(self._get_articles(), overrides)
         os.makedirs(DATA_DIR, exist_ok=True)
 
         # 일별/언론별/분류별 빈도 집계
@@ -111,10 +113,15 @@ class CLI:
                     article['date'] = date
                     yield article
 
-    def _analyze_articles(self, articles):
+    def _analyze_articles(self, articles, overrides):
         """Analyze articles"""
         for article in articles:
-            yield analyze.analyze_article(article)
+            yield analyze.analyze_article(article, overrides)
+
+    def _load_override_rules(self):
+        with open(os.path.join(DATA_DIR, 'overrides.csv'), 'r') as f:
+            csvr = csv.DictReader(f)
+            return {r['article_id']: r['rules'].split(' ') for r in csvr}
 
 
 if __name__ == '__main__':
