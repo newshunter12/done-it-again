@@ -50,13 +50,13 @@
 <li class="article {% if article.date == latest.date %}new{% endif %}">
   <div>
     <div class="cp_name">{{ article.cp_name }}</div>
-    <div class="author">{{ article.author }} /</div>
+    <div class="authors">{{ article.authors }} /</div>
     {% assign year = article.date | slice: 0, 4 %}
     {% assign month = article.date | slice: 4, 2 %}
     {% assign date = article.date | slice: 6, 2 %}
     <div class="date">{{ year }}.{{ month }}.{{ date }}</div>
     <h4 class="title">
-      <a href="{{ article.daum_url }}" target="_blank" class="{{ include.tag }}">
+      <a href="{{ article.url }}" target="_blank" class="{{ include.tag }}">
       {{ article.title }}
       </a>
     </h4>
@@ -64,7 +64,7 @@
   <div class="description">
     {{article.description}}...
   </div>
-  <a href="{{ article.daum_url }}" target="_blank" class="{{ include.tag }}">더 읽기</a>
+  <a href="{{ article.url }}" target="_blank" class="{{ include.tag }}">더 읽기</a>
 </li>
 {% endfor %}
 </ul>

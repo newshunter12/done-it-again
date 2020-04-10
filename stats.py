@@ -6,7 +6,9 @@ from itertools import groupby
 def aggregate_by_date_cp_tag(articles):
     """원본 데이터를 받아서 일별/언론별/태그별로 집계"""
     counters = {}
-    for a in articles:
+    for i, a in enumerate(articles):
+        if i >= 50000 and i % 50000 == 0:
+            print(f'{i}')
         for tag in a['tags'] or ['clean']:
             key = (a['date'], a['cp_name'], tag)
             counters[key] = counters.get(key, 0) + 1

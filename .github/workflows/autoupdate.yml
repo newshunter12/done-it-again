@@ -2,7 +2,7 @@ name: Update data
 
 on:
   schedule:
-  - cron: "30 4,10,16,22 * * *"
+    - cron: "30 * * * *"
   push:
     branches:
     - master
@@ -35,7 +35,7 @@ jobs:
         git add docs/_data
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -m '새로 추가된 뉴스 분석' || true
+        git commit -m '자동: 새로 추가된 뉴스 분석' || true
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
