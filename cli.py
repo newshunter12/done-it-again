@@ -9,7 +9,6 @@ import fire
 import analyze
 import stats
 
-
 SRC_DIR = 'news/docs/data'
 DATA_DIR = 'docs/_data'
 
@@ -145,4 +144,3 @@ class CLI:
 
 if __name__ == '__main__':
     fire.Fire(CLI())
-
