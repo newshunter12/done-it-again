@@ -1,0 +1,345 @@
+---
+---
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WCLWH4M');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="{{ "/assets/css/index.css" | relative_url }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@900&display=swap" rel="stylesheet">
+    <title>언론이 또</title>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCLWH4M"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <header>
+      <a name="#home"></a>
+      <h1>언론이 또</h1>
+
+      {% assign latest = site.data.stats_daily | reverse %}
+      {% assign latest = latest[0] %}
+      <div class="daily-stats">
+        {% assign month = latest.date | slice: 4, 2 | plus: 0 %}
+        {% assign date =  latest.date | slice: 6, 2 | plus: 0 %}
+        {{ month }}월 {{ date }}일에 수집된 기사
+        <strong>{{ latest.total }}건</strong> 중 부적절한 표현
+        <strong>{{ latest.bad }}건</strong>
+      </div>
+
+      <blockquote>
+        <p class="quote">
+        "성폭력 사건의 보도는 ‘성폭력 근절’이라는 공공성을 갖추어야 한다. 성폭력에
+        대한 잘못된 통념을 재생산 할 수 있는 보도를 해서는 안된다.<br>
+        <br>
+        성폭력은 명백한 폭력이다. 성폭력을 가해자의 변명을 인용해 설명하거나
+        희화화, 선정적으로 보도해서는 안 된다."
+        </p>
+
+        <div class="source">
+          여성민우회 &lt;<a href="http://womenlink.or.kr/archives/3798" target="_blank">성폭력보도 가이드라인</a>&gt;
+        </div>
+      </blockquote>
+
+      <div class="brief">
+        <p><strong class="title">
+          언론, 성차별 부추기는 관행 이어와<br>
+          보도, 성인지 감수성을 지녀야 할 때
+        </strong></p>
+        <p>
+          일상에서 뉴스를 보고 계신가요?<br>
+          평소에 우리가 보고 듣는 뉴스에는<br>
+          <strong>성차별적 표현</strong>과
+          <strong>범죄를 미화하는 표현</strong>이<br>
+          익숙하게 자리잡고 있습니다.
+        </p>
+        <p>
+          편하고 쉽게 쓰인 부적절한 <strong>그 표현들</strong>.<br>
+          데이터 분석을 통해 <strong>그 표현들</strong>이 얼마나 자주
+          쓰이는지<br>
+          해당 기사를 직접 모았습니다.
+        </p>
+        <p>
+          언론에서 마구잡이로 쓰는 단어의 외연을 걷어내고<br>
+          내포하는 의미를 바로 인식하는 것이 이 사이트의 취지입니다.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      {% assign articles = site.data.articles | reverse %}
+
+      {% capture guide %}
+      <p>
+      부적절한 표현이 담긴 최근 기사들을 모았습니다.
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="latest" guide=guide %}
+
+      {% capture guide %}
+      <p>
+      <span class="bad">몹쓸 짓</span>,
+      <span class="bad">손찌검</span>,
+      <span class="bad">홧김에</span> 등의 표현은 성폭력의 심각성을
+      상대적으로 가볍게 축소하고 희석할 우려가 있습니다. 자신의 가해를
+      변명하는 가해자의 말을 부각시키고 선정적으로 보도하는 일이 없도록
+      가해 행동은
+      <span class="good">성폭력</span>,
+      <span class="good">성범죄</span>와 같이 정확히 지칭해야 합니다.
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="trivialize" guide=guide %}
+
+      {% capture guide %}
+      <p>
+      성폭력 가해자는
+      <span class="bad">악마</span>,
+      <span class="bad">인면수심</span>,
+      <span class="bad">괴물</span>로 표현되는 경우가 많습니다. 이러한
+      표현은 가해자를 비일상적 인물로 묘사하여 성폭력이 일상과 분리된
+      범죄라는 통념을 재생산할 수 있습니다. 단순 호기심 자극성 내용보다는
+      반복적으로 벌어지는 성범죄와 성폭력의 배경에 놓인
+      <span class="good">사회적, 구조적 문제</span>에 더 집중해야 합니다.
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="demonize" guide=guide %}
+
+      {% capture guide %}
+      <p>
+      범죄 행위인 '불법 촬영'을 예능 프로그램의 형식인
+      <span class="bad">몰래카메라</span> 또는
+      <span class="bad">몰카</span>와 혼용하여, 범죄의 심각성을 축소하거나
+      희화화할 우려가 있습니다.
+      <span class="good">불법 촬영</span> 또는여
+      <span class="good">불법 촬영물</span>이 더 정확한 표현입니다.
+      <a href="https://news.v.daum.net/v/20171013100513273" target="_blank">경찰청의
+        공식 브리핑</a>에서도 '몰카'를 '불법촬영'으로 바꾸어 사용하고 있습니다.
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="molka" guide=guide %}
+
+      {% capture guide %}
+      <p>
+      미투(me too)는 성폭력에 대해 용기내 고발한다는 주체성이 있는 캠페인
+      입니다.
+      <span class="bad">나도 당했다</span>는 표현은 피해자의 적극적
+      고발 행위가 갖는 의미를 축소시킵니다. 피해를 강조하는 표현보다
+      고발에 주체의식이 있는
+      <span class="good">나도 말한다</span>,
+      <span class="good">나도 고발한다</span>가 #metoo 캠페인 의도와
+      일치하는 표현입니다.
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="metoo" guide=guide %}
+
+      {% capture guide %}
+      <p>
+      연인과의 이별은
+      <span class="bad">복수</span>의 대상이 될 수 없으며 개인 사생활을
+      촬영한 영상은
+      <span class="bad">포르노</span>가 아닙니다. 따라서
+      <span class="bad">리벤지 포르노</span>라는 표현 대신, 무단으로 유출된
+      <span class="good">디지털 성범죄 영상물</span>이라는 정확한 용어를
+      사용해야 합니다.
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="porn" guide=guide %}
+
+      {% capture guide %}
+      <p>
+      <span class="bad">아동 음란물</span>,
+      <span class="bad">청소년 음란물</span>은 "음란물"이 아니라 아동/청소년
+      학대 행위를 담은 범죄 영상입니다. 따라서 영상을 촬영하는 행위는
+      <span class="good">아동/청소년 성착취</span>로, 촬영된 범죄 영상물은
+      <span class="good">아동/청소년 성착취물</span>로 표현해야 합니다.
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="abuse" guide=guide %}
+
+      {% capture guide %}
+      <p>
+      <span class="bad">저출산</span>은 사회에서 인구 재생산이 저조한 현상을
+      지칭하는 용어입니다. 인구 재생산은 우리 모두의 책임이나
+      <span class="bad">저출산</span>은 '여성이 출산을 하지 않음'의 의미를
+      확대시켜 인구 재생산의 문제를 여성에게 전가하는 표현입니다. 인구수
+      감소 문제에 대해 통상적으로 사용하는 표현으로서
+      <span class="good">저출생</span>이라는 표현 사용을 제안합니다.
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="bearing" guide=guide %}
+
+      {% capture guide %}
+      <p>
+      여성 직업군에 대해서만
+      <span class="bad">여교사</span>,
+      <span class="bad">여의사</span> 등의 표현을 쓰는 건 ‘인간의 기본
+      성별을 남성’으로 인식하는 관행에서 비롯되었으며, 여성 전문직 종사자에
+      대한 성적 대상화를 부추깁니다. 필요한 경우가 아니라면 성별에 따라
+      직업군에 대한 편견 및 성적 대상화를 강화하지 않도록
+      <span class="good">교사</span>,
+      <span class="good">의사</span> 등 성별 부각 없는 표현 사용을 권장합니다.
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="profession" guide=guide %}
+
+      {% capture guide %}
+      <p>
+      데이터 분석 결과
+      <span class="bad">(O세,여)</span>처럼 여성 성별을 표시한 기사가
+      '(O세, 남)'처럼 남성 성별 표시보다 약 20배 가량 많았습니다.
+      여성에게만 성별을 표기를 하는건 남성을 '인간의 기본 성별'로 여기는
+      관행입니다. 기사의 맥락 상 성별 표기가 반드시 필요한 경우가
+      아니라면 여남 모두
+      <span class="good">아무개씨(20세)</span>로 표기할 것을 권장합니다.
+      </p>
+      {% endcapture %}
+      {% include section.html articles=articles tag="gender" guide=guide %}
+
+      <section class='haf'>
+        <h2>(불)명예의 전당</h2>
+
+        {% assign stats = site.data.stats_worst_cps[0] %}
+        {% assign ref = site.data.stats_worst_cps[0] %}
+        <section class='worst'>
+          <h3>부적절한 표현을 <span class="bad">가장 많이 쓴</span> 언론사</h3>
+          <p>
+          각 언론사별로 최근 6개월 이내에 수집된 기사 중에서 부적절한 표현이
+          담긴 기사의 비율이 가장 높은 언론사를 꼽았습니다.
+          <strong>1위</strong>는 수집된 기사 총
+          <strong>{{ stats.total }}</strong>건 중 부적절한 표현이 담긴 기사가
+          <strong>{{ stats.bad }}</strong>건으로 전체 기사의
+          <strong>{{ stats.ratio | times: 100 | round: 2 }}%</strong>를 기록한
+          <span class="bad">{{ stats.cp_name }}</span> 입니다.
+          </p>
+          {% assign rankers = site.data.stats_worst_cps | slice: 0, 10 %}
+          {% include cp_ranks.html ref=ref rankers=rankers %}
+
+        </section>
+
+        {% assign stats = site.data.stats_best_cps[0] %}
+        <section class='best'>
+          <h3>부적절한 표현을 <span class="good">가장 적게 쓴</span> 언론사</h3>
+          <p>
+          각 언론사별로 최근 6개월 이내에 수집된 기사 중에서 부적절한 표현이
+          담긴 기사의 비율이 가장 낮은 언론사를 꼽았습니다.
+          <strong>1위</strong>는 수집된 기사 총
+          <strong>{{ stats.total }}</strong>건 중 부적절한 표현이 담긴 기사가
+          <strong>{{ stats.bad }}</strong>건으로 전체 기사의
+          <strong>{{ stats.ratio | times: 100 | round: 2 }}%</strong>를 기록한
+          <span class="good">{{ stats.cp_name }}</span> 입니다.
+          </p>
+
+          {% assign rankers = site.data.stats_best_cps | slice: 0, 10 %}
+          {% include cp_ranks.html ref=ref rankers=rankers %}
+        </section>
+      </section>
+
+      <section class="best-practices">
+        <h2>가이드라인</h2>
+
+        <h3>성폭력 사건 보도 수첩</h3>
+        <p>
+        <a href="http://www.mogef.go.kr/mp/pcd/mp_pcd_s001d.do?mid=plc504&bbtSn=695063"
+          target="_blank">성폭력 사건 보도 수첩</a>은
+        성폭력 사건 2차 피해 방지를 위해 여성가족부와 한국기자협회가
+        공동으로 제작하여 2014년에 공개한 자료입니다.
+        </p>
+
+        <h3>성폭력 보도 가이드라인</h3>
+        <p>
+        성폭력 사건이 보도되는 것은 '성폭력 근절'이라는 공공성을 갖추어야
+        하고 그러기 위해 성폭력피해생존자 관점의 보도가 필요합니다.
+        여성민우회에서는 성폭력 보도 시 최소한의 보도수칙으로
+        <a href="http://womenlink.or.kr/archives/3798" target="_blank">성폭력
+          보도 가이드라인</a>을 만들어 2006년에 공개하였습니다.
+        </p>
+
+        <h3>성폭력 범죄 보도 세부 권고 기준</h3>
+        <p>
+        성폭력 범죄 보도는 사건의 특성상 취재와 보도과정에서
+        피해자와 그 가족 등이 2차 피해를 볼 수 있고, 사회 전반에 미치는 영향이
+        크다는 점에서 매우 신중히 접근해야 합니다. 이에 한국기자협회는
+        <a
+          href="https://www.journalist.or.kr/news/section4.html?p_num=9">성범죄
+          보도 세부 권고 기준</a>을 마련해 2012년에
+        공개하였습니다.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>문의, 제안, 오류신고:</p>
+      <ul>
+        <li>
+          트위터
+          <a href="https://twitter.com/newsgim12" target="_blank">@newsgim12</a>
+        <li>
+          이메일
+          <a href="mailto:newsgim12@gmail.com">newsgim12@gmail.com</a>
+      </ul>
+
+      <p>안내:</p>
+      <ul>
+        <li>
+        이 사이트의 모든 정보는 공익을 위한 목적으로 제공됩니다.
+        <li>
+        이 사이트의 모든 기사는 알고리즘에 의해 자동으로 분류되었으며, 각 언론사의
+        기사 중 일부를 샘플링한 결과이므로 오분류나 오차가 있을 수 있습니다.
+      </ul>
+    </footer>
+
+    <script>
+      // 부적절한 표현에 강조표시 넣기
+      (function() {
+        const tags = [
+          'trivialize',
+          'demonize',
+          'molka',
+          'metoo',
+          'bearing',
+          'porn',
+          'abuse',
+          'gender',
+          'profession',
+        ]
+
+        const latest = document.querySelectorAll(`#latest .article`);
+        highlightArticles(latest, tags);
+
+        tags.forEach(tag => {
+          const articles = document.querySelectorAll(`#${tag} .article`);
+          highlightArticles(articles, [tag]);
+        })
+
+        function highlightArticles(articles, tags) {
+          for(let i = 0; i < articles.length; i++) {
+            const article = articles[i];
+            const title = article.querySelector('.title a');
+            const description = article.querySelector('.description');
+
+            highlight(title, tags);
+            highlight(description, tags);
+          }
+        }
+
+        function highlight(el, tags) {
+          const p = /\{(.+?)\}(.+?)\{\/.+?\}/g
+          el.innerHTML = el.innerHTML.replace(p, (m, tag, text) => {
+            return tags.includes(tag)
+              ? `<span class="bad ${tag}">${text}</span>`
+              : text;
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

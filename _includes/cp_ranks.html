@@ -1,0 +1,17 @@
+<ol class="chart">
+  {% for row in include.rankers %}
+  <li>
+    <div class="name">{{ row.cp_name }}</div>
+    <div class="bar-container">
+      {% assign ratio = row.ratio | divided_by: include.ref.ratio %}
+      {% assign percent = ratio | times: 100 %}
+      <div class="bar" style="width: {{ percent }}%"></div>
+      <div class="label">
+        <div class="percent">{{ row.ratio | times: 100 | round: 2}}%</div>
+        <div class="counts">({{ row.total }}건 중 {{ row.bad }}건)</description>
+        </div>
+      </div>
+  </li>
+  {% endfor %}
+</ol>
+

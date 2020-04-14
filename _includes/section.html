@@ -1,0 +1,71 @@
+<section class="box" id="{{ include.tag }}">
+<h3>
+{% if include.tag == 'latest' %}
+  최근 기사
+{% else %}
+  {{ site.data.tag_defs[include.tag].name }}
+{% endif %}
+</h3>
+
+<div class="guide">
+{{ include.guide }}
+
+{% if include.tag != 'latest' %}
+{%
+  assign stats = site.data.stats_freq_tags | where_exp: "item", "item.tag == include.tag"
+%}
+{% assign stats = stats[0] %}
+<div class="stats">
+  <p>
+  <svg class="sparkline-pie" width="34" height="34" viewbox="0 0 100 100">
+    <circle r="50" cx="50" cy="50" style="
+      stroke-dasharray:
+        calc(3.1415926 * 2 * 50 * {{ stats.ratio }}),
+        calc(3.1415926 * 2 * 50 * (1 - {{ stats.ratio}}));
+    "></circle>
+  </svg>
+
+  최근 6개월 이내에 수집된 기사 중 부적절한 표현이 담긴 기사는 총
+  <strong>{{ stats.total }}건</strong> 입니다. 이 중
+  <span class="bad">{{ site.data.tag_defs[include.tag].name }}</span> 범주에
+  속한 표현이 담긴 기사는 총
+  <strong>{{ stats.count }}건</strong>으로 약
+  <strong>{{ stats.ratio | times: 100 | round: 1 }}%</strong>
+  입니다.
+  </p>
+</div>
+{% endif %}
+</div>
+
+<ul class="articles">
+{% if include.tag == 'latest' %}
+{%   assign section_articles = include.articles | slice: 0, 50 %}
+{% else %}
+{%  assign section_articles = articles
+    | where_exp: "item", "item.tags contains include.tag"
+    | slice: 0, 50
+%}
+{% endif %}
+{% for article in section_articles %}
+<li class="article {% if article.date == latest.date %}new{% endif %}">
+  <div>
+    <div class="cp_name">{{ article.cp_name }}</div>
+    <div class="authors">{{ article.authors }} /</div>
+    {% assign year = article.date | slice: 0, 4 %}
+    {% assign month = article.date | slice: 4, 2 %}
+    {% assign date = article.date | slice: 6, 2 %}
+    <div class="date">{{ year }}.{{ month }}.{{ date }}</div>
+    <h4 class="title">
+      <a href="{{ article.url }}" target="_blank" class="{{ include.tag }}">
+      {{ article.title }}
+      </a>
+    </h4>
+  </div>
+  <div class="description">
+    {{article.description}}...
+  </div>
+  <a href="{{ article.url }}" target="_blank" class="{{ include.tag }}">더 읽기</a>
+</li>
+{% endfor %}
+</ul>
+</section>
