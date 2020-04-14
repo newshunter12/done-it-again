@@ -11,32 +11,30 @@ on:
     - '**.html'
     - '**.sass'
     - '**.js'
+    - '**.sh'
     - 'docs/_data/overrides.csv'
     - 'docs/_data/tag_defs.yaml'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Fetch data
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v1
       with:
-        repository: misogynyX/news
-        path: news
-    - name: Analyze
-      uses: abatilo/actions-poetry@v1.5.0
-      with:
-        python_version: 3.8.0
-        poetry_version: 1.0.5
-        args: run ./update.sh
-    - name: Commit
-      run: |
-        git add docs/_data
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git commit -m '자동: 새로 추가된 뉴스 분석' || true
-    - name: Push changes
-      uses: ad-m/github-push-action@master
+        python_version: 3.8
+    - uses: chrislennon/action-aws-cli@1.1
+    - uses: dschep/install-poetry-action@v1.3
+    - name: Install dependencies
+      run: poetry install
+    - name: Update data
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      run: poetry run ./update.sh
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        enable_jekyll: true

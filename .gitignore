@@ -1,5 +1,7 @@
 # Project
-news/
+data/
+docs/_data/*.csv
+.env
 
 # Python
 .mypy_cache/**

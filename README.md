@@ -2,9 +2,8 @@
 
 ![Update data](https://github.com/misogynyX/done-it-again/workflows/Update%20data/badge.svg)
 
-[https://github.com/misogynyX/news](https://github.com/misogynyX/news)에서 수집된 신문 기사를 분석하여 범죄를 왜곡하거나 미화하는 표현들, 성차별적 관행을 담은 표현들을 찾아 알리는 웹사이트.
+[https://github.com/misogynyX/news-crawler](https://github.com/misogynyX/news-crawler)에서 수집된 신문 기사를 분석하여 범죄를 왜곡하거나 미화하는 표현들, 성차별적 관행을 담은 표현들을 찾아 알리는 웹사이트.
 
-<!--Github Pages 호스팅설정, Github Action 스케줄러 설정-->
 ## 폴더 설명
 
 - `docs/_data/articles.csv` : 뉴스 원본에서 분석한 결과를 저장 (단어별 태그)
@@ -101,10 +100,10 @@
 * 며느리
 * 누나
 * 여친 / 여자친구(아이돌 그룹과 구분 필요)
-* 여00 / 女00
+* 여00 / 女00
   * 예) 여교사, 여중생, 여제자 등
 * 00녀/女
-  * 예) 동거녀, (범죄특성)녀, n0대녀, nn세 女, 등
+  * 예) 동거녀, (범죄특성)녀, n0대녀, nn세 女, 등
 제외)
 * 자녀
 * 남녀 (주로 특수문자로 분리되어 사용되고 붙은 경우도 있음)
