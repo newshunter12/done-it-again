@@ -6,14 +6,6 @@ on:
   push:
     branches:
     - master
-    paths:
-    - '**.py'
-    - '**.html'
-    - '**.sass'
-    - '**.js'
-    - '**.sh'
-    - 'docs/_data/overrides.csv'
-    - 'docs/_data/tag_defs.yaml'
 jobs:
   build:
     runs-on: ubuntu-latest

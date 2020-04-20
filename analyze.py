@@ -115,13 +115,16 @@ OCCUPATIONS = ['중생', '고생', '대생', '학생', '종업원', '직원']
 
 def analyze_gender(text) -> Tuple[bool, str]:
     """여성만 성별 표기를 하는지 검사"""
+    REGIONS = ['여수', '여의도', '여주']
+
     return analyze(
         'gender',
         text,
         r'(\w+\((\d{0,3}.?[여|女]성?|[여|女]성?.?\d{0,3})\)|' \
         r'\b[여女]\s?(' + '|'.join(OCCUPATIONS) +  '))',
         r'(\w+\((\d{0,3}.?[남|男]성?|[남|男]성?.?\d{0,3})\)|' \
-        r'\b[남男][자성]?\s?(' + '|'.join(PROFESSIONS + OCCUPATIONS) + '))',
+        r'\b[남男][자성]?\s?(' + '|'.join(PROFESSIONS + OCCUPATIONS) + ')|' \
+        '(' + '|'.join(REGIONS) + '))',
     )
 
 
