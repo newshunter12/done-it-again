@@ -2,7 +2,7 @@ name: Update data
 
 on:
   schedule:
-    - cron: "30 * * * *"
+    - cron: "40 * * * *"
   push:
     branches:
     - master
@@ -11,22 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
-      with:
-        python_version: 3.8
     - uses: chrislennon/action-aws-cli@1.1
-    - uses: dschep/install-poetry-action@v1.3
-    - name: Install dependencies
-      run: poetry install
     - name: Update data
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: poetry run ./update.sh
+      run: ./update.sh
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+        publish_dir: docs/
         enable_jekyll: true

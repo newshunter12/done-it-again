@@ -1,13 +1,8 @@
 # Project
-data/
+docs/.jekyll-cache
+docs/_site/
 docs/_data/*.csv
 .env
-
-# Python
-.mypy_cache/**
-.python-version
-__pycache__/
-.coverage
 
 # Misc.
 *.swp
