@@ -1,8 +1,0 @@
-# Project
-.jekyll-cache
-_site/
-_data/*.csv
-.env
-
-# Misc.
-*.swp
