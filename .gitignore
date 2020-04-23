@@ -1,5 +1,8 @@
-_site
-.sass-cache
+# Project
 .jekyll-cache
-.jekyll-metadata
-vendor
+_site/
+_data/*.csv
+.env
+
+# Misc.
+*.swp
