@@ -55,8 +55,8 @@ def analyze_trivialize(text) -> Tuple[bool, str]:
     return analyze(
         'trivialize',
         text,
-        r'(몹쓸\s?짓|검은\s?손|홧김에)',
-        r'(방화|주식)',
+        r'(몹쓸\s?짓|검은\s?손|홧김에|신체\s?접촉)',
+        r'(방화|주식|코로나|질병|감염|바이러스|예방)',
     )
 
 
